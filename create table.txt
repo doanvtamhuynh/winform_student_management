@@ -1,0 +1,80 @@
+CREATE TABLE tblMonHoc
+(
+	[ngaytao] DATETIME NULL  DEFAULT getdate(), 
+    [nguoitao] VARCHAR(30) NULL DEFAULT 'admin', 
+    [ngaycapnhat] DATETIME NULL DEFAULT getdate(), 
+    [nguoicapnhat] VARCHAR(30) NULL DEFAULT 'admin', 
+    [mamonhoc] INT NOT NULL IDENTITY, 
+    [tenmonhoc] NVARCHAR(150) NOT NULL, 
+    [sotinchi] INT NULL, 
+    PRIMARY KEY ([mamonhoc])
+)
+
+CREATE TABLE [dbo].[tblGiaoVien] (
+    [ngaytao]      DATETIME      DEFAULT (getdate()) NULL,
+    [nguoitao]     VARCHAR (30)  DEFAULT ('admin') NULL,
+    [ngaycapnhat]  DATETIME      DEFAULT (getdate()) NULL,
+    [nguoicapnhat] VARCHAR (30)  DEFAULT ('admin') NULL,
+    [magiaovien]   INT           IDENTITY (1, 1) NOT NULL,
+    [ho]           NVARCHAR (10) NOT NULL,
+    [tendem]       NVARCHAR (20) NULL,
+    [ten]          NVARCHAR (10) NOT NULL,
+    [gioitinh]     TINYINT       NULL,
+    [ngaysinh]     DATE          NULL,
+    [dienthoai]    VARCHAR (30)  NULL,
+    [email]        VARCHAR (150) NULL,
+    [diachi] NVARCHAR(150) NULL, 
+    CONSTRAINT [PK_tblGiaoVien] PRIMARY KEY CLUSTERED ([magiaovien] ASC)
+);
+
+
+
+CREATE TABLE [dbo].[tblDiem] (
+    [ngaytao]      DATETIME     DEFAULT (getdate()) NULL,
+    [nguoitao]     VARCHAR (30) DEFAULT ('admin') NULL,
+    [ngaycapnhat]  DATETIME     DEFAULT (getdate()) NULL,
+    [nguoicapnhat] VARCHAR (30) DEFAULT ('admin') NULL,
+    [mamonhoc]     INT          NOT NULL,
+    [magiaovien]   INT          NOT NULL,
+    [masinhvien]   VARCHAR (50) NOT NULL,
+    [lanhoc]       INT          NOT NULL,
+    [diemthilan1]  FLOAT (53)   NULL,
+    [diemthilan2]  FLOAT (53)   NULL,
+    CONSTRAINT [PK_tblDiem] PRIMARY KEY CLUSTERED ([lanhoc] ASC), 
+    CONSTRAINT [FK_tblDiem_tblGiaoVien] FOREIGN KEY ([magiaovien]) REFERENCES [tblGiaoVien]([magiaovien]), 
+    CONSTRAINT [FK_tblDiem_tblMonHoc] FOREIGN KEY ([mamonhoc]) REFERENCES [tblMonHoc]([mamonhoc]), 
+    CONSTRAINT [FK_tblDiem_tblSinhVien] FOREIGN KEY ([masinhvien]) REFERENCES [tblSinhVien]([masinhvien])
+);
+
+
+
+
+
+CREATE TABLE [dbo].[tblSinhVien]
+(
+	[ngaytao] DATETIME NULL DEFAULT getdate(), 
+    [nguoitao] VARCHAR(30) NULL DEFAULT 'admin', 
+    [ngaycapnhat] DATETIME NULL DEFAULT getdate(), 
+	[nguoicapnhat] VARCHAR(30) NULL DEFAULT 'admin',
+    [masinhvien] VARCHAR(50) NOT NULL, 
+    [ho] NVARCHAR(10) NOT NULL, 
+    [tendem] NVARCHAR(20) NULL, 
+    [ten] NVARCHAR(10) NOT NULL, 
+    [ngaysinh] DATE NULL, 
+    [gioitinh] TINYINT NULL, 
+    [quequan] NVARCHAR(150) NULL, 
+    [diachi] NVARCHAR(150) NULL, 
+    [dienthoai] VARCHAR(30) NULL, 
+    [email] VARCHAR(150) NULL, 
+    CONSTRAINT [PK_Table] PRIMARY KEY ([masinhvien]) 
+)
+
+CREATE TABLE [dbo].[TaiKhoan] (
+    [tentaikhoan] VARCHAR (50)  NOT NULL,
+    [matkhau]     VARCHAR (250) NULL,
+    PRIMARY KEY CLUSTERED ([tentaikhoan] ASC)
+);
+
+
+
+

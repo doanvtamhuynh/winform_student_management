@@ -1,0 +1,210 @@
+create procedure selectAllSinhVien
+as
+	select
+		masinhvien,
+		case
+			when len(tendem) > 0 then
+				concat(ho,' ',tendem,' ',ten)
+			else concat (ho,' ',ten)
+		end as hoten,
+		convert(varchar(10),ngaysinh,103) as nsinh,
+		case
+			when gioitinh = 1 then N'Nam'
+			else N'Nữ'
+		end as gt,
+		quequan,
+		diachi,
+		dienthoai,
+		email
+	from tblSinhVien
+GO;
+
+exec selectAllSinhVien
+
+create procedure selectAllMonHoc
+as
+	select
+		mamonhoc,
+		tenmonhoc,
+		sotinchi
+	from tblMonHoc
+GO;
+
+exec selectAllMonHoc
+
+
+create procedure selectAllDiem
+as
+	select
+		malophoc,
+		masinhvien,
+		lanhoc,
+		diemthilan1,
+		diemthilan2
+	from tblDiem
+GO;
+
+create procedure selectAllGiaoVien
+as
+	select
+		magiaovien,
+		case
+			when len(tendem) > 0 then
+				concat(ho,' ',tendem,' ',ten)
+			else concat (ho,' ',ten)
+		end as hoten,
+		case
+			when gioitinh = 1 then N'Nam'
+			else N'Nữ'
+		end as gt,
+		convert(varchar(10),ngaysinh,103) as nsinh,
+		dienthoai,
+		email,
+		diachi
+	from tblGiaoVien
+GO;
+
+exec selectAllGiaoVien
+
+create procedure ThemMoiSV
+	@Ho nvarchar(10),
+	@TenDem nvarchar(20),
+	@Ten nvarchar(10),
+	@Ngaysinh date,
+	@Gioitinh tinyint,
+	@Quequan nvarchar(150),
+	@Diachi varchar(30),
+	@Dienthoai varchar(30),
+	@Email varchar(150)
+as
+begin
+	insert into tblSinhVien
+	(
+		masinhvien,
+		ho,tendem,ten,
+		ngaysinh,gioitinh,
+		quequan,diachi,
+		dienthoai,email
+	)values(
+		'SV'+cast(next value for sinhvienSeq as varchar(30)),
+		@Ho,@TenDem,@Ten,
+		@Ngaysinh,
+		@Gioitinh,
+		@Quequan,@Diachi,
+		@Dienthoai,@Email
+	);
+	if @@ROWCOUNT > 0 begin return 1 end
+	else begin return 0 end
+end
+
+create procedure updateSV
+	@masinhvien varchar(50),
+	@ho nvarchar(10),
+	@tendem nvarchar(20),
+	@ten nvarchar(10),
+	@ngaysinh date,
+	@gioitinh tinyint,
+	@quequan nvarchar(150),
+	@diachi varchar(30),
+	@dienthoai varchar(30),
+	@email varchar(150)
+as
+begin
+	update tblSinhVien
+	set
+		ho = @ho,
+		tendem = @tendem,
+		ten = @ten,
+		ngaysinh = @ngaysinh,
+		gioitinh = @gioitinh,
+		quequan = @quequan,
+		diachi = @diachi,
+		dienthoai = @dienthoai,
+		email = @email
+	where masinhvien = @masinhvien;
+	if @@ROWCOUNT > 0 begin return 1 end
+	else begin return 0 end;
+end
+
+create procedure selectSV
+	@masinhvien varchar(50)
+as
+begin
+	select
+		ho,tendem,ten,convert(varchar(10),ngaysinh,103) as ngsinh,
+		gioitinh,
+		quequan,diachi,dienthoai,email
+	from tblSinhVien
+	where masinhvien = @masinhvien;
+end
+
+create procedure selectGV
+	@magiaovien int
+as
+begin
+	select
+		magiaovien,	
+		ho,tendem,ten,gioitinh,convert(varchar(10),ngaysinh,103) as ngsinh,		
+		dienthoai,email,diachi
+	from tblGiaoVien
+	where magiaovien = @magiaovien;
+end
+
+create procedure updateGV
+	@masinhvien int,
+	@ho nvarchar(10),
+	@tendem nvarchar(20),
+	@ten nvarchar(10),
+	@gioitinh tinyint,
+	@ngaysinh date,
+	@dienthoai varchar(30),
+	@email varchar(150),
+	@diachi nvarchar(150)
+		
+as
+begin
+	update tblGiaoVien
+	set
+		ho = @ho,
+		tendem = @tendem,
+		ten = @ten,
+		gioitinh = @gioitinh,
+		ngaysinh = @ngaysinh,
+		dienthoai = @dienthoai,	
+		email = @email,
+		diachi = @diachi
+		
+	where magiaovien = @masinhvien;
+	if @@ROWCOUNT > 0 begin return 1 end
+	else begin return 0 end;
+end
+
+create procedure selectMon
+	@mamonhoc int
+as
+begin
+	select
+		mamonhoc,	
+		tenmonhoc,
+		sotinchi
+	from tblMonHoc
+	where mamonhoc = @mamonhoc;
+end
+
+create procedure updateMon
+
+	@mamonhoc int,
+	@tenmonhoc nvarchar(150),
+	@sotinchi int
+		
+as
+begin
+	update tblMonHoc
+	set
+		tenmonhoc = @tenmonhoc,
+		sotinchi = @sotinchi
+		
+	where mamonhoc = @mamonhoc;
+	if @@ROWCOUNT > 0 begin return 1 end
+	else begin return 0 end;
+end

@@ -1,0 +1,107 @@
+select * from TaiKhoan
+
+insert into TaiKhoan values ('admin','admin');
+
+
+select * from tblMonHoc;
+
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Lập trình ứng dụng .NET',3);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Kỹ thuật thương mại điện tử',3);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Cấu trúc dữ liệu và giải thuật',3);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Cơ sở dữ liệu',3);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Lập trình hướng đối tượng',4);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Lắp ráp bảo trì hệ thống',2);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Đồ án CDIO',1);
+insert into tblMonHoc(tenmonhoc,sotinchi)
+values(N'Công nghệ phần mềm',3);
+
+
+select * from tblGiaoVien;
+
+
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Văn',N'A',1,'1991-01-01','0981234567','nguyenvana@gmail.com',N'Đà Nẵng');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Văn',N'B',1,'1993-01-01','0981265367','nguyenvanb@gmail.com',N'Quảng Nam');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Thị',N'C',0,'1995-02-01','0972930567','nguyenthic@gmail.com',N'Huế');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Văn',N'D',1,'1889-07-09','0981231245','nguyenvand@gmail.com',N'Quảng Ngãi');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Văn',N'E',1,'1981-11-11','0982423235','nguyenvane@gmail.com',N'Đà Nẵng');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Thị',N'F',0,'1991-06-01','0981215343','nguyenthif@gmail.com',N'Đà Nẵng');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Văn',N'G',1,'1999-01-01','0981234124','nguyenvang@gmail.com',N'Đà Nẵng');
+insert into tblGiaoVien(ho,tendem,ten,gioitinh,ngaysinh,dienthoai,email,diachi)
+values(N'Nguyễn',N'Thị',N'H',0,'1991-01-04','0981234214','nguyenthih@gmail.com',N'Quảng Nam');
+
+
+select * from tblSinhVien;
+
+create sequence sinhvienSeq
+	start with 0
+	increment by 1;
+
+	select next value for sinhvienSeq
+
+insert into tblSinhVien(masinhvien,ho,tendem,ten,ngaysinh,gioitinh,quequan,diachi,dienthoai,email)
+values(
+	'SV' + CAST(next value for sinhvienSeq as varchar(30)),
+	N'Đoàn',
+	N'Vũ Tam',
+	N'Huynh',
+	'2002-03-21',
+	1,
+	N'Quảng Nam',
+	N'Đà Nẵng',
+	'0862204575',
+	'huynhdoan.2132@gmail.com'
+)
+insert into tblSinhVien(masinhvien,ho,tendem,ten,ngaysinh,gioitinh,quequan,diachi,dienthoai,email)
+values(
+	'SV' + CAST(next value for sinhvienSeq as varchar(30)),
+	N'Đoàn',
+	N'Minh',
+	N'Vương',
+	'2002-03-17',
+	1,
+	N'Quảng Nam',
+	N'Đà Nẵng',
+	'0837847924',
+	'doanminhvuong071@gmail.com'
+)
+insert into tblSinhVien(masinhvien,ho,tendem,ten,ngaysinh,gioitinh,quequan,diachi,dienthoai,email)
+values(
+	'SV' + CAST(next value for sinhvienSeq as varchar(30)),
+	N'Nguyễn',
+	N'Hoàng Trung',
+	N'Hiếu',
+	'2002-04-17',
+	1,
+	N'Quảng Ngãi',
+	N'Đà Nẵng',
+	'0334342706',
+	'nhth174@gmail.com'
+)
+insert into tblSinhVien(masinhvien,ho,tendem,ten,ngaysinh,gioitinh,quequan,diachi,dienthoai,email)
+values(
+	'SV' + CAST(next value for sinhvienSeq as varchar(30)),
+	N'Đặng',
+	N'Gia',
+	N'Huy',
+	'2002-05-03',
+	1,
+	N'Huế',
+	N'Đà Nẵng',
+	'0911501660',
+	'huyhuy78798@gmali.com'
+)
+
