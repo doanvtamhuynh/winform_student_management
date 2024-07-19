@@ -12,7 +12,7 @@ Dự án này là một ứng dụng WinForms đơn giản để quản lý thô
 - Xóa sinh viên khỏi danh sách.
 - Đăng kí tín chỉ
 - Xem điểm thi
-
+ 
 ## Hướng Dẫn Cài Đặt
 Clone repository về máy tính của bạn.
    ```bash
